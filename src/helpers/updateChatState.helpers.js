@@ -1,14 +1,18 @@
-import { db } from "../../config/db.js";
+import { db } from "../../config/server.js";
 import {
   insertChatState,
   selectChatState,
+  updateChatState,
 } from "../queries/chatState.queries.js";
 
-async function updateChatState(socket) {
+const refreshChatState = async (socket) => {
   const socketId = socket.id;
   const userId = socket.handshake.query.userId;
 
   try {
+    console.log(selectChatState(userId));
+    console.log(updateChatState(userId, socketId));
+    console.log(insertChatState(userId, socketId));
     const userChatState = await db.query(selectChatState(userId));
     const hasRecord = !!userChatState.rows.length;
 
@@ -19,6 +23,6 @@ async function updateChatState(socket) {
     console.log(err);
     socket.disconnect();
   }
-}
+};
 
-export { updateChatState };
+export { refreshChatState };

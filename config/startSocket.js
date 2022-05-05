@@ -1,6 +1,5 @@
 import { Server } from "socket.io";
-import { updateChatState } from "../src/helpers/updateChatState.helpers.js";
-import { sendMessageController } from "../src/socket/sendMessageController.socket.js";
+import { refreshChatState } from "../src/helpers/updateChatState.helpers.js";
 
 function startSocket(server) {
   const io = new Server(server, {
@@ -14,8 +13,8 @@ function startSocket(server) {
     console.log("nova conexão socket", socket.id);
     console.log(await io.allSockets());
 
-    updateChatState(socket);
-    sendMessageController(socket);
+    await refreshChatState(socket);
+    // sendMessageController(socket);
   });
 }
 

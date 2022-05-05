@@ -4,10 +4,12 @@ import fs from "fs";
 import { createServer } from "http";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import { startDb } from "./db.js";
 import { startSocket } from "./startSocket.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+export const db = startDb();
 
 const app = express();
 app.use(cors());
