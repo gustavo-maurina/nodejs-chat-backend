@@ -1,6 +1,6 @@
 import pg from "pg";
 
-export const client = new pg.Client({
+const client = new pg.Client({
   user: "postgres",
   host: "localhost",
   database: "postgres",
@@ -12,3 +12,5 @@ client.connect((err) => {
   if (err) throw err;
   console.log("connected");
 });
+
+export { client as db };
